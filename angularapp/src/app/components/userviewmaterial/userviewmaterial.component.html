@@ -1,0 +1,69 @@
+    <div class="container mt-5">
+      <div class="card shadow-lg p-4 material-table-container">
+        <!-- Search Bar -->
+        <div class="search-container mb-4">
+          <input
+            type="text"
+            [(ngModel)]="searchText"
+            (input)="searchByMaterialName()"
+            placeholder="Search by Material Name..."
+            class="form-control search-input"
+          />
+        </div>
+    
+        <!-- Title -->
+        <h2 class="text-center mb-4 material-table-title">Available Materials</h2>
+    
+        <!-- Responsive Table -->
+        <div class="table-responsive">
+          <table class="table table-hover table-striped align-middle material-table">
+            <!-- Table Header -->
+            <thead class="table-dark text-warning">
+              <tr>
+                <th>S.No</th>
+                <th>Material Name</th>
+                <th>Category</th>
+                <th>Price Per Unit</th>
+                <th>Unit Type</th>
+                <th>Availability</th>
+                <th>Description</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+    
+            <!-- Table Body -->
+            <tbody>
+              <!-- No Data Found Row -->
+              <tr *ngIf="filteredMaterial.length === 0">
+                <td colspan="8" class="text-center text-muted">No Materials Found</td>
+              </tr>
+    
+              <!-- Material Rows -->
+              <tr *ngFor="let material of filteredMaterial; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ material.materialName }}</td>
+                <td>{{ material.category }}</td>
+                <td>{{ material.pricePerUnit }}</td>
+                <td>{{ material.unitType }}</td>
+                <td>{{ material.availabilityStatus }}</td>
+                <td>{{ material.description }}</td>
+                <td>
+                  <!-- Action Button -->
+                  <button
+                    (click)="toggleRequest(material.materialId)"
+                    class="btn btn-primary btn-sm"
+                  >
+                    Request
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+ 
+    

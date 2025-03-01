@@ -1,0 +1,43 @@
+<!-- Search Input -->
+<div class="search-container">
+  <input type="text" [(ngModel)]="searchText" (input)="searchByMaterialName()" 
+         placeholder="Search by Material Name..." class="search-input">
+</div>
+
+<!-- Display Cards -->
+<div class="material-container">
+  <div *ngFor="let material of filteredMaterialRequests" class="material-card">
+    <h3>{{ material.material.materialName }}</h3>
+    <p>Category: {{ material.material.category }}</p>
+    <p>Price Per Unit: {{ material.material.pricePerUnit }}</p>
+    <p>Unit Type: {{ material.material.unitType }}</p>
+    <p>Status: {{ material.status }}</p>
+
+    <!-- Buttons -->
+    <button (click)="showMoreDetails(material)" class="btn btn-info">Show More</button>
+    <button (click)="deleteMaterialRequest(material.materialRequestId)" class="btn btn-danger">Delete</button>
+    <button (click)="navigateToAddFeedback(material.material.materialId)" class="btn btn-success">Write a Review</button>
+  </div>
+</div>
+
+<!-- Modal for "Show More" -->
+<!-- Modal for "Show More" -->
+<div *ngIf="selectedMaterialRequest" class="modal-overlay">
+  <div class="modal-content">
+    <button class="close-btn" (click)="closeModal()">×</button>
+    <h2>Request Details</h2>
+    <p><strong>Material Name:</strong> {{ selectedMaterialRequest.material.materialName }}</p>
+    <p><strong>Category:</strong> {{ selectedMaterialRequest.material.category }}</p>
+    <p><strong>Price Per Unit:</strong> {{ selectedMaterialRequest.material.pricePerUnit }}</p>
+    <p><strong>Unit Type:</strong> {{ selectedMaterialRequest.material.unitType }}</p>
+    <p><strong>Request Date:</strong> {{ selectedMaterialRequest.requestDate | date: 'dd/MM/yyyy' }}</p>
+    <p><strong>Quantity:</strong> {{ selectedMaterialRequest.quantity }}</p>
+    <p><strong>Urgency Level:</strong> {{ selectedMaterialRequest.urgencyLevel }}</p>
+    <p><strong>Status:</strong> {{ selectedMaterialRequest.status }}</p>
+    <p><strong>Comments:</strong> {{ selectedMaterialRequest.comments }}</p>
+    <p><strong>Delivery Address:</strong> {{ selectedMaterialRequest.deliveryAddress }}</p>
+    <button (click)="closeModal()" class="btn btn-secondary">Close</button>
+  </div>
+</div>
+
+

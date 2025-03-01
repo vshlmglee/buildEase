@@ -1,0 +1,98 @@
+  <div class="container mt-5">
+    <div class="card shadow-lg p-4 form-container">
+      <h2 class="text-center mb-4 form-title">Add Material</h2>
+      <form [formGroup]="materialForm" (ngSubmit)="adminAddMaterial()">
+        <!-- Material Name -->
+        <div class="form-group mb-3">
+          <label for="materialName" class="form-label">Material Name</label>
+          <input
+            type="text"
+            id="materialName"
+            formControlName="materialName"
+            class="form-control"
+            placeholder="Enter material name"
+          />
+          <div *ngIf="f.materialName.invalid && f.materialName.touched" class="text-danger mt-1">
+            Material Name is required and Material Name should have atleast 2 characters.
+          </div>
+        </div>
+        <!-- Description -->
+        <div>
+          <label for="description" class="form-label">Description</label>
+          <textarea id="description" formControlName="description" class="form-control" placeholder="Enter Description"></textarea>
+          <div *ngIf="f.description.invalid && f.description.touched" class="text-danger mt-1">Description is required.</div>
+        </div>
+        <div>
+
+          <div>
+            <label for="category" class="form-label">Category</label>
+            <select id="category" formControlName="category" class="form-select">
+              <option value="" disabled selected>Select Category</option>
+              <option value="Electrical">Electrical</option>
+              <option value="Furniture">Furniture</option>
+              <option value="Flooring">Flooring</option>
+              <option value="Bricks">Bricks</option>
+              <option value="Metal">Metal</option>
+              <option value="Glass">Glass</option>
+              <option value="Cement">Cement</option>
+              <option value="Painting">Painting</option>
+              <option value="Lightning">Lightning & Fixtures</option>
+              <option value="Plumbing">Plumbing</option>
+              <option value="others">others</option>
+            </select>
+            <div *ngIf="f.category.invalid && f.category.touched" class="text-danger mt-1">Category is required.</div>
+         </div>
+
+          <!-- Price per unit -->
+          <div>
+            <label for="pricePerUnit" class="form-label">Price Per Unit</label>
+            <input type="number" id="pricePerUnit" formControlName="pricePerUnit" class="form-control" placeholder="Enter Price">
+            <div *ngIf="f.pricePerUnit.invalid && f.pricePerUnit.touched" class="text-danger mt-1">
+              Price Per Unit is required and must be positive.
+            </div>
+          </div>  
+  
+        <!-- Unit Type -->
+        <div class="form-group mb-3">
+          <label for="unitType" class="form-label">Unit Type</label>
+          <select id="unitType" formControlName="unitType" class="form-select">
+            <option value="" disabled selected>Select unit type</option>
+            <option value="Piece">Piece</option>
+            <option value="Kg">Kilogram</option>
+            <option value="Litre">Litre</option>
+            <option value="Bag">Bag</option>
+          </select>
+          <div *ngIf="f.unitType.invalid && f.unitType.touched" class="text-danger mt-1">
+            Unit Type is required.
+          </div>
+        </div>
+  
+        <!-- Availability Status -->
+        <div class="form-group mb-3">
+          <label for="availabilityStatus" class="form-label">Availability Status</label>
+          <select id="availabilityStatus" formControlName="availabilityStatus" class="form-select">
+            <option value="" disabled selected>Select availability status</option>
+            <option value="In Stock">In Stock</option>
+            <option value="Out of Stock">Out of Stock</option>
+          </select>
+          <div *ngIf="f.availabilityStatus.invalid && f.availabilityStatus.touched" class="text-danger mt-1">
+            Availability Status is required.
+          </div>
+        </div>
+  
+        <!-- Submit Button -->
+        <button
+          type="submit"
+          class="btn btn-primary w-100 submit-button"
+          [disabled]="materialForm.invalid"
+        >
+          Add Material
+        </button>
+      </div>
+      </form>
+    </div>
+  </div>
+  
+  
+
+  

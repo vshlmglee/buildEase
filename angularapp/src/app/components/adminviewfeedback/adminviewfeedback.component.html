@@ -1,0 +1,99 @@
+<div class="container mt-5">
+  <div class="card shadow-lg p-4">
+    <!-- Title -->
+    <h1 class="text-center mb-4 feedback-title">Feedback Received</h1>
+
+    <!-- Filter by Category -->
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <label for="category" class="form-label me-2">Filter by Category:</label>
+      <select
+        id="category"
+        [(ngModel)]="selectedCategory"
+        (change)="filterFeedbacks()"
+        class="form-select w-auto"
+      >
+        <option *ngFor="let category of categories">{{ category }}</option>
+      </select>
+    </div>
+
+    <!-- Responsive Table -->
+    <div class="table-responsive">
+      <table class="table table-hover table-striped align-middle feedback-table">
+        <!-- Table Header -->
+        <thead class="table-dark text-warning">
+          <tr>
+            <th>S.NO</th>
+            <th>USER NAME</th>
+            <th>MATERIAL NAME</th>
+            <th>CATEGORY</th>
+            <th>FEEDBACK</th>
+            <th>POSTED DATE</th>
+            <th>ACTION</th>
+          </tr>
+        </thead>
+
+        <!-- Table Body -->
+        <tbody>
+          <!-- No Data Found Row -->
+          <tr *ngIf="feedback.length === 0">
+            <td colspan="7" class="text-center text-muted">No Data Found</td>
+          </tr>
+
+          <!-- Feedback Rows -->
+          <tr *ngFor="let fb of feedback; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>{{ fb.user.username }}</td>
+            <td>{{ fb.material.materialName }}</td>
+            <td>{{ fb.category }}</td>
+            <td>{{ fb.feedbackText }}</td>
+            <td>{{ fb.date | date }}</td>
+            <td>
+              <!-- Action Buttons -->
+              <button
+                type="button"
+                (click)="showProfile(fb.user)"
+                class="btn btn-info btn-sm me-2"
+              >
+                Show Profile
+              </button>
+              <button
+                type="button"
+                (click)="viewMaterialInfo(fb.material)"
+                class="btn btn-primary btn-sm"
+              >
+                View Material Info
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- Modal for Showing Profile -->
+<div *ngIf="selectedUser" class="modal-overlay">
+  <div class="modal-content">
+    <button class="close-btn" (click)="closeModal()">×</button>
+    <h2>User Profile</h2>
+    <p><strong>Email:</strong> {{ selectedUser.email }}</p>
+    <p><strong>Username:</strong> {{ selectedUser.username }}</p>
+    <p><strong>Mobile Number:</strong> {{ selectedUser.mobileNumber }}</p>
+    <button (click)="closeModal()" class="btn btn-secondary">Close</button>
+  </div>
+</div>
+
+<!-- Modal for Viewing Material Info -->
+<div *ngIf="selectedMaterial" class="modal-overlay">
+  <div class="modal-content">
+    <button class="close-btn" (click)="closeModal()">×</button>
+    <h2>Material Info</h2>
+    <p><strong>Material Name:</strong> {{ selectedMaterial.materialName }}</p>
+    <p><strong>Category:</strong> {{ selectedMaterial.category }}</p>
+    <p><strong>Unit Type:</strong> {{ selectedMaterial.unitType }}</p>
+    <p><strong>Price Per Unit:</strong> {{ selectedMaterial.pricePerUnit }}</p>
+    <p><strong>Availability Status:</strong> {{ selectedMaterial.availabilityStatus }}</p>
+    <p><strong>Description:</strong> {{ selectedMaterial.description }}</p>
+    <button (click)="closeModal()" class="btn btn-secondary">Close</button>
+  </div>
+</div>

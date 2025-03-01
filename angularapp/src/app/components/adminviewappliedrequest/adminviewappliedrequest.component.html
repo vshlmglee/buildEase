@@ -1,0 +1,112 @@
+<div class="container mt-5">
+  <div class="card shadow-lg p-4">
+    <!-- Title -->
+    <h2 class="text-center mb-4 table-title">Material Requests for Approval</h2>
+
+    <!-- Search and Filter -->
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <input
+        type="text"
+        [(ngModel)]="searchQuery"
+        (input)="searchByMaterialName()"
+        placeholder="Search by Material Name..."
+        class="form-control w-50"
+      />
+      <div>
+        <label for="statusFilter" class="form-label me-2">Filter by Status:</label>
+        <select id="statusFilter" (change)="filterByStatus($event.target.value)" class="form-select d-inline-block w-auto">
+          <option value="All">All</option>
+          <option value="Pending">Pending</option>
+          <option value="Approved">Approved</option>
+          <option value="Rejected">Rejected</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Responsive Table -->
+    <div class="table-responsive">
+      <table class="table table-hover table-striped align-middle material-table">
+        <!-- Table Header -->
+        <thead class="table-dark text-warning">
+          <tr>
+            <th>S.NO</th>
+            <th>USERNAME</th>
+            <th>MATERIAL NAME</th>
+            <th>QUANTITY</th>
+            <th>REQUEST DATE</th>
+            <th>STATUS</th>
+            <th>ACTION</th>
+          </tr>
+        </thead>
+
+        <!-- Table Body -->
+        <tbody>
+          <tr *ngFor="let material of filteredMaterialRequests; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>{{ material.user.username }}</td>
+            <td>{{ material.material.materialName }}</td>
+            <td>{{ material.quantity }}</td>
+            <td>{{ material.requestDate| date: 'dd/MM/yyyy'}}</td> 
+            <td>{{ material.status }}</td>
+            <td>
+              <!-- Action Buttons -->
+              <button (click)="showMoreDetails(material)" class="btn btn-info btn-sm me-2">Show More</button>
+
+              <!-- Conditional Approve/Reject Buttons -->
+              <!-- Show Approve button if status is rejected -->
+              <button *ngIf="material.status === 'Rejected'" (click)="approveRequest(material.materialRequestId)" class="btn btn-success btn-sm me-2">
+                Approve
+              </button>
+
+              <!-- Show Reject button if status is approved -->
+              <button *ngIf="material.status === 'Approved'" (click)="rejectRequest(material.materialRequestId)" class="btn btn-danger btn-sm me-2">
+                Reject
+              </button>
+
+              <!-- Show both Approve and Reject if status is Pending -->
+              <button *ngIf="material.status === 'Pending'" (click)="approveRequest(material.materialRequestId)" class="btn btn-success btn-sm me-2">
+                Approve
+              </button>
+
+              <button *ngIf="material.status === 'Pending'" (click)="rejectRequest(material.materialRequestId)" class="btn btn-danger btn-sm">
+                Reject
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Modal for "Show More" -->
+    <div *ngIf="selectedMaterialRequest" class="modal fade show d-block bg-dark bg-opacity-75" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content bg-light text-dark shadow-lg p-4">
+          <!-- Close Button -->
+          <button class="btn-close ms-auto mb-3" (click)="closeModal()"></button>
+
+          <!-- Modal Content -->
+          <h3>Request Details</h3>
+          <p><strong>Username:</strong> {{ selectedMaterialRequest.user.username }}</p>
+          <p><strong>Material Name:</strong> {{ selectedMaterialRequest.material.materialName }}</p>
+          <p><strong>Category:</strong> {{ selectedMaterialRequest.material.category }}</p>
+          <p><strong>Unit Type:</strong> {{ selectedMaterialRequest.material.unitType }}</p>
+          <p><strong>Price Per Unit:</strong> {{ selectedMaterialRequest.material.pricePerUnit }}</p>
+          <p><strong>Quantity:</strong> {{ selectedMaterialRequest.quantity }}</p>
+          <p><strong>Request Date:</strong> {{ selectedMaterialRequest.requestDate | date: 'dd/MM/yyyy' }}</p>
+          <p><strong>Urgency Level:</strong> {{ selectedMaterialRequest.urgencyLevel }}</p>
+          <p><strong>Status:</strong> {{ selectedMaterialRequest.status }}</p>
+          <p><strong>Delivery Address:</strong> {{ selectedMaterialRequest.deliveryAddress }}</p>
+          <p><strong>Preferred Delivery Date:</strong> {{ selectedMaterialRequest.preferredDeliveryDate | date: 'dd/MM/yyyy' }}</p>
+          <p><strong>Time Slot:</strong> {{ selectedMaterialRequest.timeSlot }}</p>
+          <p><strong>Comments:</strong> {{ selectedMaterialRequest.comments }}</p> 
+
+          <!-- Close Button -->
+          <button (click)="closeModal()" class="btn btn-secondary w-100 mt-3">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+

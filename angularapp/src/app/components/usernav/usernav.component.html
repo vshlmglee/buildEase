@@ -1,0 +1,97 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-lg">
+    <div class="container-fluid">
+      <!-- Logo -->
+      <a class="navbar-brand fw-bold" href="#">{{ title }}</a>
+  
+      <!-- Toggler Button for Mobile View -->
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#userNavbar"
+        aria-controls="userNavbar"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+  
+      <!-- Navbar Links -->
+      <div class="collapse navbar-collapse" id="userNavbar">
+        <ul class="navbar-nav ms-auto">
+          <!-- User Link -->
+          <li class="nav-item">
+            <a class="nav-link text-white" >{{userName}}/User</a>
+          </li>
+  
+          <!-- Home Link -->
+          <li class="nav-item">
+            <a class="nav-link text-white" routerLink="/home-page">Home</a>
+          </li>
+  
+          <!-- Dropdown for Materials -->
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle text-white"
+              href="#"
+              id="materialsDropdown"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Materials
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark animate__animated animate__fadeIn" aria-labelledby="materialsDropdown">
+              <li><a class="dropdown-item" routerLink="/user/view-material">View Materials</a></li>
+              <li><a class="dropdown-item" routerLink="/user/view/appliedrequest">My Request</a></li>
+            </ul>
+          </li>
+  
+          <!-- Feedbacks Link -->
+          <li class="nav-item">
+            <a class="nav-link text-white" routerLink="/user/view-feedback">Feedbacks</a>
+          </li>
+  
+          <!-- Logout Button -->
+          <li class="nav-item">
+            <button (click)="logout()" class="btn btn-outline-danger ms-3">Logout</button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  
+  <!-- Logout Confirmation Popup -->
+  <div *ngIf="showLogoutPopup" class="modal fade show d-block bg-dark bg-opacity-75" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content bg-dark text-white border-secondary">
+        <div class="modal-header">
+          <h5 class="modal-title">Confirm Logout</h5>
+        </div>
+        <div class="modal-body">
+          <p>Are you sure you want to logout?</p>
+        </div>
+        <div class="modal-footer">
+          <button (click)="confirmLogout()" class="btn btn-danger">Yes</button>
+          <button (click)="cancelLogout()" class="btn btn-secondary">No</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Success Popup -->
+  <div *ngIf="showSuccessPopup" class="modal fade show d-block bg-dark bg-opacity-75" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content bg-success text-white border-secondary">
+        <div class="modal-body text-center">
+          Successfully logged out!
+        </div>
+        <div class="modal-footer justify-content-center">
+          <button (click)="closeSuccessPopup()" class="btn btn-light">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+  

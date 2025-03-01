@@ -1,0 +1,38 @@
+
+/* Hover effect for nav links */
+.nav-link:hover {
+    color: #0d6efd !important; /* Bootstrap primary color */
+    transition: color 0.3s ease-in-out;
+  }
+  
+  /* Dropdown animation */
+  .dropdown-menu {
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .dropdown-menu.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  /* Logout button hover effect */
+  .btn-outline-danger:hover {
+    background-color: #dc3545;
+    color: #fff;
+  }
+  
+  /* Modal background fade effect */
+  .modal.fade.show {
+    animation: fadeInModal 0.3s ease-in-out;
+  }
+  
+  @keyframes fadeInModal {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }

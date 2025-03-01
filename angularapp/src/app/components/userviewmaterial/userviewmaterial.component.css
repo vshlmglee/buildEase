@@ -1,0 +1,60 @@
+   /* Container Styling */
+   .material-table-container {
+    border-radius: 10px;
+    background-color: #f8f9fa; /* Light grey background */
+  }
+  
+  /* Title Styling */
+  .material-table-title {
+    color: #0d6efd; /* Bootstrap primary color */
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: bold;
+    animation: fadeInTitle 1s ease-in-out;
+  }
+  
+  /* Title Animation */
+  @keyframes fadeInTitle {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Search Input */
+  .search-input {
+    border-radius: 5px;
+  }
+  
+  .search-input:focus {
+    border-color: #0d6efd; /* Blue focus border */
+    box-shadow: 0px 0px 5px rgba(13, 110, 253, 0.5); /* Blue glow effect */
+  }
+  
+  /* Table Styling */
+  .table-hover tbody tr:hover {
+    background-color: #d1ecf1; /* Light blue hover effect */
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  .table-dark {
+    background-color: #343a40; /* Dark header background */
+  }
+  
+  .text-warning {
+    color: #ffc107 !important; /* Yellow text for header */
+  }
+  
+  /* No Data Found Row */
+  .text-muted {
+    font-style: italic;
+  }
+  
+  /* Action Button */
+  .btn-primary:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+  }

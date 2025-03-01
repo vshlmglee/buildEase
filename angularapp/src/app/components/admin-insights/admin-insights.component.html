@@ -1,0 +1,51 @@
+<div class="container mt-5">
+  <!-- Enhanced Title -->
+  <h2 class="text-center mb-4 fw-bold admin-insights-title">
+    Admin Insights
+  </h2>
+
+  <!-- Responsive Table -->
+  <div class="table-responsive shadow-lg">
+    <table class="table table-hover table-striped align-middle">
+      <!-- Updated Table Header -->
+      <thead class="table-dark text-warning">
+        <tr>
+          <th scope="col">S.No</th>
+          <th scope="col">User Name</th>
+          <th scope="col">Total Requests</th>
+          <th scope="col">High Urgency Requests</th>
+          <th scope="col">Pending Requests</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+
+      <!-- Table Body -->
+      <tbody>
+        <tr *ngFor="let data of insights; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ data.username }}</td>
+          <td>{{ data.totalRequests }}</td>
+          <td>{{ data.highUrgencyRequests }}</td>
+          <td>{{ data.pendingRequests }}</td>
+          <td>
+            <button class="btn btn-primary btn-sm shadow-sm" (click)="showOrderDetails(data)">View Orders</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Modal for "View Orders" -->
+<div *ngIf="selectedOrder" class="modal-overlay">
+  <div class="modal-content">
+    <button class="close-btn" (click)="closeModal()">×</button>
+    <h2>Order Details</h2>
+    <p><strong>User Name:</strong> {{ selectedOrder.username }}</p>
+    <p><strong>Total Requests:</strong> {{ selectedOrder.totalRequests }}</p>
+    <p><strong>High Urgency Requests:</strong> {{ selectedOrder.highUrgencyRequests }}</p>
+    <p><strong>Pending Requests:</strong> {{ selectedOrder.pendingRequests }}</p>
+    <!-- Add other necessary details here -->
+    <button (click)="closeModal()" class="btn btn-secondary">Close</button>
+  </div>
+</div>

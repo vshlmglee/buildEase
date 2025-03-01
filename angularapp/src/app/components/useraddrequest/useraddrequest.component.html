@@ -1,0 +1,90 @@
+<div class="form-container">
+
+  <!-- Back Button -->
+
+  <div class="back-button-container">
+    <button type="button" (click)="navigateToUserViewMaterial()" class="back-button">Back</button>
+  </div>
+
+  <h2 class="form-title">Material Request Form</h2>
+  <!-- Validation Message for Required Fields -->
+  <div *ngIf="showValidationMessage" class="validation-message">
+    All required fields must be filled out.
+  </div>
+
+  <form [formGroup]="materialRequestForm" (ngSubmit)="addRequest()">
+    <div class="form-group">
+      <label for="deliveryAddress">Delivery Address *</label>
+      <textarea id="deliveryAddress" formControlName="deliveryAddress" required></textarea>
+      <div *ngIf="materialRequestForm.get('deliveryAddress').invalid && (materialRequestForm.get('deliveryAddress').touched || materialRequestForm.get('deliveryAddress').dirty)">
+        <small class="error">Delivery Address is required.</small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="contactNumber">Contact Number *</label>
+      <input id="contactNumber" formControlName="contactNumber" required>
+      <div *ngIf="materialRequestForm.get('contactNumber').invalid && (materialRequestForm.get('contactNumber').touched || materialRequestForm.get('contactNumber').dirty)">
+        <small class="error">Contact Number is required and must be 10 digits.</small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="quantity">Quantity *</label>
+      <input id="quantity" type="number" formControlName="quantity" required>
+      <div *ngIf="materialRequestForm.get('quantity').invalid && (materialRequestForm.get('quantity').touched || materialRequestForm.get('quantity').dirty)">
+        <small class="error">Quantity is required and must be at least 1.</small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="urgencyLevel">Urgency Level *</label>
+      <select id="urgencyLevel" formControlName="urgencyLevel" required>
+        <option value="">Select Urgency Level</option>
+        <option value="low">Low</option>
+        <option value="medium">Medium</option>
+        <option value="high">High</option>
+      </select>
+      <div *ngIf="materialRequestForm.get('urgencyLevel').invalid && (materialRequestForm.get('urgencyLevel').touched || materialRequestForm.get('urgencyLevel').dirty)">
+        <small class="error">Urgency Level is required.</small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="preferredDeliveryDate">Preferred Delivery Date *</label>
+      <input id="preferredDeliveryDate" type="date" formControlName="preferredDeliveryDate" required>
+      <div *ngIf="materialRequestForm.get('preferredDeliveryDate').invalid && (materialRequestForm.get('preferredDeliveryDate').touched || materialRequestForm.get('preferredDeliveryDate').dirty)">
+        <small class="error">Preferred Delivery Date is required.</small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="preferredTimeSlot">Preferred Time Slot *</label>
+      <select id="preferredTimeSlot" formControlName="timeSlot" required>
+        <option value="">Select a time slot</option>
+        <option value="morning">Morning</option>
+        <option value="afternoon">Afternoon</option>
+        <option value="night">Night</option>
+      </select>
+      <div *ngIf="materialRequestForm.get('timeSlot').invalid && (materialRequestForm.get('timeSlot').touched || materialRequestForm.get('timeSlot').dirty)">
+        <small class="error">Time Slot is required.</small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="comments">Comments</label>
+      <textarea id="comments" formControlName="comments"></textarea>
+    </div>
+
+    <!-- Submit Button -->
+    <button type="submit" class="submit-button">{{ isEditMode ? 'Update' : 'Add' }} Request</button>
+
+    <!-- Success Popup -->
+    <div *ngIf="showSuccessPopup" class="popup-overlay">
+      <div class="popup-content">
+        Request Submitted Successfully!
+        <button (click)="closePopup()">OK</button>
+      </div>
+    </div>
+  </form>
+</div>

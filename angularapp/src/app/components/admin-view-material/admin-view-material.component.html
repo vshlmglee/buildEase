@@ -1,0 +1,76 @@
+    <div class="container mt-5">
+      <div class="card shadow-lg p-4">
+        <!-- Title -->
+        <h2 class="text-center mb-4 admin-materials-title">Materials</h2>
+    
+        <!-- Search Input -->
+        <div class="mb-3">
+          <label for="searchName" class="form-label">Search:</label>
+          <input
+            type="text"
+            id="searchName"
+            [(ngModel)]="searchQuery"
+            (input)="searchByMaterialName()"
+            class="form-control"
+            placeholder="Material Name..."
+          />
+        </div>
+    
+        <!-- Responsive Table -->
+        <div class="table-responsive">
+          <table class="table table-hover table-striped align-middle material-table">
+            <!-- Table Header -->
+            <thead class="table-dark text-warning">
+              <tr>
+                <th>S.No</th>
+                <th>Material Name</th>
+                <th>Category</th>
+                <th>Price Per Unit</th>
+                <th>Unit Type</th>
+                <th>Availability</th>
+                <th>Description</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+    
+            <!-- Table Body -->
+            <tbody>
+              <tr *ngFor="let material of filteredMaterials; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ material.materialName }}</td>
+                <td>{{ material.category }}</td>
+                <td>{{ material.pricePerUnit }}</td>
+                <td>{{ material.unitType }}</td>
+                <td>{{ material.availabilityStatus }}</td>
+                <td>{{ material.description }}</td>
+                <td>
+                  <!-- Action Buttons -->
+                  <button
+                    (click)="toggleStockStatus(material)"
+                    class="btn btn-outline-primary btn-sm me-2"
+                  >
+                    {{ material.availabilityStatus === 'In Stock' ? 'Out of Stock' : 'In Stock' }}
+                  </button>
+                  <button
+                    (click)="adminUpdateMaterial(material.materialId, material)"
+                    class="btn btn-outline-warning btn-sm me-2"
+                  >
+                    Edit
+                  </button>
+                  <button
+                    (click)="adminDeleteMaterial(material.materialId)"
+                    class="btn btn-outline-danger btn-sm"
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+  

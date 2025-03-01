@@ -1,0 +1,57 @@
+
+/* Container Styling */
+.form-container {
+  background-color: #f8f9fa; /* Light grey background */
+  border-radius: 10px;
+}
+
+/* Title Styling */
+.form-title {
+  color: #0d6efd; /* Bootstrap primary color */
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: bold;
+  animation: fadeInTitle 1s ease-in-out;
+}
+
+/* Title Animation */
+@keyframes fadeInTitle {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Input Fields */
+.form-control,
+.form-select {
+  border-radius: 5px;
+  border: 1px solid #ced4da; /* Light grey border */
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: #0d6efd; /* Primary color on focus */
+  box-shadow: 0px 0px 5px rgba(13, 110, 253, 0.5); /* Blue glow effect */
+}
+
+/* Submit Button */
+.submit-button {
+  background-color: #0d6efd; /* Primary color */
+  color: white;
+  font-weight: bold;
+}
+
+.submit-button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+  transition: all 0.3s ease-in-out;
+}
+
+/* Error Messages */
+.text-danger {
+  font-size: 0.9rem;
+}

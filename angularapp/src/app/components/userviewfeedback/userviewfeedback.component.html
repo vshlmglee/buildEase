@@ -1,0 +1,77 @@
+<div class="container mt-5">
+  <div class="card shadow-lg p-4 feedback-table-container">
+    <!-- Title -->
+    <h1 class="text-center mb-4 feedback-title">My Feedback</h1>
+
+    <!-- Responsive Table -->
+    <div class="table-responsive">
+      <table class="table table-hover table-striped align-middle feedback-table">
+        <!-- Table Header -->
+        <thead class="table-dark text-warning">
+          <tr>
+            <th>S.NO</th>
+            <th>Feedback</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+
+        <!-- Table Body -->
+        <tbody>
+          <!-- No Data Found Row -->
+          <tr *ngIf="feedback.length === 0">
+            <td colspan="3" class="text-center text-muted">No Data Found</td>
+          </tr>
+
+          <!-- Feedback Rows -->
+          <tr *ngFor="let fb of feedback; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>{{ fb.feedbackText }}</td>
+            <td>
+              <!-- Action Buttons -->
+              <button
+                type="button"
+                (click)="viewMaterialInfo(fb.material)"
+                class="btn btn-primary btn-sm me-2"
+              >
+                View Material Info
+              </button>
+              <button
+                type="button"
+                (click)="openDeleteModal(fb.feedBackId)"
+                class="btn btn-danger btn-sm"
+              >
+                Delete
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- Modal for Viewing Material Info -->
+<div *ngIf="selectedMaterial" class="modal-overlay">
+  <div class="modal-content">
+    <button class="close-btn" (click)="closeModal()">×</button>
+    <h2>Material Info</h2>
+    <p><strong>Material Name:</strong> {{ selectedMaterial.materialName }}</p>
+    <p><strong>Category:</strong> {{ selectedMaterial.category }}</p>
+    <p><strong>Unit Type:</strong> {{ selectedMaterial.unitType }}</p>
+    <p><strong>Price Per Unit:</strong> {{ selectedMaterial.pricePerUnit }}</p>
+    <p><strong>Availability Status:</strong> {{ selectedMaterial.availabilityStatus }}</p>
+    <p><strong>Description:</strong> {{ selectedMaterial.description }}</p>
+    <button (click)="closeModal()" class="btn btn-secondary">Close</button>
+  </div>
+</div>
+
+<!-- Modal for Confirming Deletion -->
+<div *ngIf="deleteModalOpen" class="modal-overlay">
+  <div class="modal-content">
+    <button class="close-btn" (click)="closeDeleteModal()">×</button>
+    <h2>Confirm Deletion</h2>
+    <p>Are you sure you want to delete this feedback?</p>
+    <button (click)="confirmDelete()" class="btn btn-danger">Delete</button>
+    <button (click)="closeDeleteModal()" class="btn btn-secondary">Cancel</button>
+  </div>
+</div>

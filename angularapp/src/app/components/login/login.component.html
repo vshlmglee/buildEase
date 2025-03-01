@@ -1,0 +1,50 @@
+<div class="container-fluid vh-100 d-flex align-items-center justify-content-center bg-black" style="background-image: url('assets/images/Designer.jpeg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+  <div class="row w-100">
+    <!-- Left Section with Image -->
+    <div class="col-md-6 d-none d-md-block p-0">
+      <div class="h-100 d-flex align-items-center justify-content-center text-white text-center" style="background-color: rgba(0, 0, 0, 0.6);">
+        <h1 class="display-4 fw-bold">BuildEase</h1>
+      </div>
+    </div>
+
+    <!-- Right Section with Login Form -->
+    <div class="col-md-6 d-flex align-items-center justify-content-center">
+      <div class="card bg-dark text-white shadow-lg p-4" style="width: 100%; max-width: 400px; border-radius: 10px;">
+        <h2 class="text-center mb-4">Login</h2>
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+          <!-- Email Field -->
+          <div class="form-group mb-3">
+            <label for="email">Email</label>
+            <input type="email" id="email" formControlName="email" class="form-control bg-black text-white border-secondary" placeholder="Enter your email" />
+            <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched" class="text-danger mt-1">
+              <small *ngIf="loginForm.get('email')?.errors?.required">Email is required.</small>
+              <small *ngIf="loginForm.get('email')?.errors?.email">Invalid email format.</small>
+            </div>
+          </div>
+
+          <!-- Password Field -->
+          <div class="form-group mb-3">
+            <label for="password">Password</label>
+            <input type="password" id="password" formControlName="password" class="form-control bg-black text-white border-secondary" placeholder="Enter your password" />
+            <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="text-danger mt-1">
+              <small *ngIf="loginForm.get('password')?.errors?.required">Password is required.</small>
+            </div>
+          </div>
+
+          <!-- Error and Success Messages -->
+          <div *ngIf="errorMessage" class="alert alert-danger mt-3" role="alert">{{ errorMessage }}</div>
+          <div *ngIf="successMesssage" class="alert alert-success mt-3" role="alert">{{ successMessage }}</div>
+
+          <!-- Submit Button -->
+          <button type="submit" [disabled]="loginForm.invalid" class="btn btn-primary w-100 mt-3">Login</button>
+
+          <!-- Signup Link -->
+          <p class="text-center mt-3 mb-0">
+            Don't have an account?
+            <a routerLink="/register" class="text-primary">Signup</a>
+          </p>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

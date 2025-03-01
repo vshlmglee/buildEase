@@ -1,0 +1,53 @@
+  <div class="container mt-5">
+    <div class="card shadow-lg p-4 feedback-form-container">
+      <!-- Title -->
+      <h1 class="text-center mb-4 feedback-title">Add Feedback</h1>
+  
+      <!-- Feedback Form -->
+      <form [formGroup]="feedbackForm" (ngSubmit)="onSubmit()">
+        <!-- Category Selection -->
+        <div class="form-group mb-3">
+          <label for="category" class="form-label">Choose Category:</label>
+          <select id="category" formControlName="category" class="form-select">
+            <option value="" disabled selected>Select a category</option>
+            <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+          </select>
+          <div *ngIf="feedbackForm.get('category').invalid && feedbackForm.get('category').touched" class="text-danger mt-1">
+            Please choose a category.
+          </div>
+        </div>
+  
+        <!-- Feedback Text -->
+        <div class="form-group mb-3">
+          <label for="feedbackText" class="form-label">Feedback:</label>
+          <textarea
+            id="feedbackText"
+            formControlName="feedbackText"
+            class="form-control"
+            rows="4"
+            placeholder="Enter your feedback here..."
+          ></textarea>
+          <div *ngIf="feedbackForm.get('feedbackText').invalid && feedbackForm.get('feedbackText').touched" class="text-danger mt-1">
+            Please enter your feedback.
+          </div>
+        </div>
+  
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary w-100">Submit</button>
+      </form>
+  
+      <!-- Success Message -->
+      <div *ngIf="successMessage" class="alert alert-success mt-3">
+        {{ successMessage }}
+      </div>
+  
+      <!-- Error Message -->
+      <div *ngIf="errorMessage" class="alert alert-danger mt-3">
+        {{ errorMessage }}
+      </div>
+    </div>
+  </div>
+  
+  
+  
+ 
