@@ -1,1 +1,3 @@
+BuildEase E-Commerce is a role-based e-commerce platform designed to provide a seamless shopping experience for users while offering powerful management tools for administrators. It features secure authentication and authorization using Spring Security with JWT, allowing users to browse and purchase products while enabling admins to manage inventory and orders. The backend is built with Spring Boot and MySQL, providing a robust and scalable architecture, while the frontend is developed using Angular for a dynamic and responsive user experience. The platform follows a RESTful API architecture, ensuring smooth communication between the frontend and backend. With role-based access control (User, Admin), BuildEase ensures a secure and efficient e-commerce experience.
+
 
